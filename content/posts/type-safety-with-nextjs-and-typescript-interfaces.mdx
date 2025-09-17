@@ -1,0 +1,49 @@
+---
+title: "Type Safety with Next.js and TypeScript Interfaces"
+summary: Learn how TypeScript interfaces bring strong typing to your Next.js components, helping prevent bugs and improve maintainability.
+image: /images/posts/typesafety.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-01-22'
+---
+
+TypeScript makes it easier to write reliable applications by enforcing type safety. In Next.js, using interfaces is one of the most effective ways to keep your components predictable and maintainable.
+
+## Why Type Safety Matters
+
+When your app grows, passing props around without clear contracts can lead to unexpected runtime errors. Interfaces define a **shape** for your data and ensure your code respects it.
+
+- **Consistency**: Components always receive the correct props.
+- **Documentation**: Interfaces act like built-in documentation.
+- **Confidence**: Catch errors during development instead of at runtime.
+
+## Example with Props
+
+```tsx
+interface User {
+  id: number
+  name: string
+  email: string
+}
+
+const UserCard = ({ user }: { user: User }) => (
+  <div>
+    <h2>{user.name}</h2>
+    <p>{user.email}</p>
+  </div>
+)
+```
+
+If you pass a ```user``` object without an ```email```, TypeScript will raise an error before you even run the app.
+
+## Interfaces vs TypeScript
+
+| Feature           | `interface`                        | `type`                                     |
+| ----------------- | ---------------------------------- | ------------------------------------------ |
+| Extendable        | ✅ Yes                              | ⚠️ Limited (needs intersection `&`)        |
+| Declaration Merge | ✅ Supported                        | ❌ Not supported                            |
+| Use Case          | Contracts for objects & components | Union types, primitives, or advanced cases |
+
+
+## Conclusion
+
+Using interfaces in Next.js ensures your components are robust and self-documenting. For most component props, interfaces are the preferred option. For more advanced scenarios (like unions), type aliases can complement them.

@@ -54,6 +54,21 @@ export default function NewsletterForm() {
             onSubmit={handleSubmit(processForm)}
             className='flex flex-col items-start gap-3'
           >
+            <div className="w-full">
+              <Input
+                type="text"
+                id="name"
+                autoComplete="name"
+                placeholder="Your name"
+                className="w-full"
+                {...register('name')}
+              />
+              {errors.name?.message && (
+                <p className="ml-1 mt-2 text-sm text-rose-400">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
             <div className='w-full'>
               <Input
                 type='email'

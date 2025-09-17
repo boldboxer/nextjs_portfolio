@@ -1,0 +1,45 @@
+---
+title: "Dynamic Routing in Next.js: A Beginner's Guide"
+summary: Learn how to create flexible, dynamic routes in Next.js that adapt to your application’s data and structure.
+image: /images/posts/dynamicrouting.jpg
+author: 'dev Nyamunga'
+publishedAt: '2024-11-20'
+---
+
+One of Next.js’s most powerful features is its routing system. With dynamic routes, you can create pages that adapt to data such as blog post IDs, product IDs, or usernames.
+
+## How Dynamic Routes Work
+
+By naming a file with square brackets in the `pages` directory, Next.js automatically interprets it as a dynamic route. For example:
+
+```tsx
+// pages/posts/[id].tsx
+import { useRouter } from 'next/router';
+
+export default function Post() {
+  const { id } = useRouter().query;
+  return <h1>Post: {id}</h1>;
+}
+```
+When a user visits /posts/1, /posts/hello-world, or /posts/123, the [id].tsx file will be used to render the page.
+
+## Why Use Dynamic Routes?
+
+- **Flexibility**: You don’t have to manually create every single route.
+- **Scalability**: Great for blogs, shops, and dashboards where the number of pages grows with your data.
+- **SEO-Friendly**: Clean, descriptive URLs can help with discoverability.
+
+## Static vs Dynamic Data
+
+Dynamic routes can be paired with different data-fetching strategies:
+
+| Strategy                          | When to Use                                        | Data Freshness |
+| --------------------------------- | -------------------------------------------------- | -------------- |
+| `getStaticPaths + getStaticProps` | For static content like blogs or product catalogs. | Data is fresh at build time. Can be revalidated. |
+| `getServerSideProps`              | For dynamic, always up-to-date content.            | Data is always fresh on every request. |
+| Client-Side Fetching              | For user-specific or rapidly changing data.        | Data is fresh at the time of the client-side fetch. |
+
+
+
+## Conclusion
+Dynamic routing in Next.js makes your application more flexible and easier to maintain. Whether you’re building a blog, a shop, or a user dashboard, this feature ensures you don’t need to hardcode every single route.

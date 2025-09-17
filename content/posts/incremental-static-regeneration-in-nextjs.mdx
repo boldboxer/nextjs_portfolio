@@ -1,0 +1,43 @@
+---
+title: "Incremental Static Regeneration (ISR) in Next.js Explained"
+summary: ISR combines the speed of static sites with the freshness of server-rendered pages. Learn how it works and when to use it.
+image: /images/posts/incremental.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-04-16'
+---
+
+Incremental Static Regeneration (ISR) lets you update static pages after your site is built. It gives you the performance of static generation with the ability to keep content fresh.
+
+## How ISR Works
+
+When you use `getStaticProps` with `revalidate`, Next.js serves the static page until the revalidation window passes. Then, the next visitor triggers a background regeneration.
+
+```tsx
+export async function getStaticProps() {
+  return {
+    props: { time: new Date().toISOString() },
+    revalidate: 10, // regenerate every 10 seconds
+  }
+}
+```
+
+> ### Benefits of ISR
+>
+> 1. ***Speed***: Static HTML is served instantly.
+> 2. **Freshness**: Content updates automatically over time.
+> 3. **Scalability**: No need to rebuild the whole site for a single update.
+
+### When to Use ISR
+
+-Blogs or news sites where content changes but doesn’t need to be real-time.\
+-E-commerce product listings that update occasionally.\
+-Marketing pages that need periodic refreshes.
+
+### Alternatives
+
+-Static Generation (SSG): Best for rarely changing content.\
+-Server-Side Rendering (SSR): Best for real-time, personalized content.
+
+## Conclusion
+
+ISR gives you the best of both worlds: speed and freshness. If you want scalable, fast apps without constant rebuilds, ISR should be your default strategy.

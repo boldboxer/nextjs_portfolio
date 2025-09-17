@@ -1,0 +1,44 @@
+---
+title: "Building Secure API Routes with Authentication in Next.js"
+summary: Learn how to secure your Next.js API routes using authentication strategies like JWT, sessions, and middleware.
+image: /images/posts/secureapi.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-06-11'
+---
+
+API routes in Next.js are powerful, but by default, they’re open to anyone. Adding authentication ensures only authorized users can access sensitive data.
+
+## Example with JWT Authentication
+
+```tsx
+import { NextApiRequest, NextApiResponse } from 'next'
+import jwt from 'jsonwebtoken'
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  const token = req.headers.authorization?.split(' ')[1]
+  if (!token) return res.status(401).json({ error: 'Unauthorized' })
+
+  try {
+    jwt.verify(token, process.env.JWT_SECRET!)
+    res.status(200).json({ message: 'Secure data' })
+  } catch {
+    res.status(403).json({ error: 'Forbidden' })
+  }
+}
+```
+
+### Best Practices
+
+-Always Use HTTPS: Prevent token leakage.\
+-Store Secrets Safely: Use environment variables.\
+-Rotate Keys Regularly: Keep tokens fresh and secure.\
+-Validate Input: Never trust user input blindly.
+
+### Alternatives
+
+-**NextAuth.js**: A library for authentication with providers like `Google`, `GitHub`, or credentials.\
+-**Clerk or Auth0**: Third-party services offering auth as a service.
+
+## Conclusion
+
+Securing API routes is critical for protecting user data and business logic. JWTs, sessions, or third-party providers can help depending on your needs. Choose the method that balances security and development speed.

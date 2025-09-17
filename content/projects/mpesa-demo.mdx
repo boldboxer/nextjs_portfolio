@@ -1,0 +1,75 @@
+---
+title: "M-Pesa Payment Integration (Demo)"
+summary: A demonstration project showing how to integrate M-Pesa APIs into a modern web app.
+image: /images/projects/mpesa_api.png
+author: 'Dev Nyamunga'
+publishedAt: '2025-08-15'
+---
+
+Since payment systems are critical for local businesses, I developed a **demo project** showing how to integrate M-Pesa with modern web applications.
+
+## Features
+- Payment initiation via M-Pesa API.
+- Transaction status callbacks.
+- Dashboard for payment history.
+- Secure authentication.
+
+## Technologies
+- Node.js (API integration)
+- Next.js (frontend)
+- M-Pesa Daraja API
+- TailwindCSS
+
+## Live Snippets
+>authentication
+>
+>>
+```
+import axios, { AxiosError } from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load environment variables from .env file
+
+// Get credentials from environment variables
+const CONSUMER_KEY = process.env.MPESA_CONSUMER_KEY ?? ''; // Your app's consumer key
+const CONSUMER_SECRET = process.env.MPESA_CONSUMER_SECRET ?? ''; // Your app's consumer secret
+
+// Variable to store the access token and expiry time
+let accessToken: string | null = null;
+let tokenExpiry: number | null = null;
+```
+
+>Simulate Transaction
+>>
+```
+export const simulateTransaction = async () => {
+  const token = await getAuthToken();
+
+  const response = await axios.post(
+    'https://sandbox.safaricom.co.ke/', //sandbox env for testing
+    {
+      ShortCode: '123456', // Replace with your sandbox Paybill number
+      CommandID: 'CustomerPayBillOnline',
+      Amount: 1000,
+      Msisdn: '254712345678', // Safaricom test phone number will be provided during sandboxing
+      BillRefNumber: 'TestPayment',
+    },
+    {
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
+}
+  ```
+>>Example of simulated transaction data
+```
+  const simulatedTransaction = {
+    TransID: 'SimulatedTransaction12345', // Add this field for receipt
+    TransAmount: 1000, // Add this field for amount
+    MSISDN: '254712345678', // Add this field for phone number
+    ResultCode: response.data.ResponseCode,
+    ResultDesc: response.data.ResponseDescription,
+  };
+  ```
+
+## Conclusion
+This project shows my ability to **localize financial technology** for Kenya, a critical skill for most real-world web apps.

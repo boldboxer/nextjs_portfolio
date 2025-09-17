@@ -1,0 +1,38 @@
+---
+title: "Optimizing Next.js Apps for Performance and Scalability"
+summary: Improve performance and scalability of your Next.js applications with caching, code splitting, and image optimization.
+image: /images/posts/optimizing.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-08-26'
+---
+
+Fast websites keep users happy and boost SEO rankings. Next.js provides several built-in tools and best practices for optimization.
+
+## Key Techniques
+
+### 1. Image Optimization
+Next.js automatically optimizes images with the `Image` component.
+
+```tsx
+import Image from 'next/image'
+
+<Image src="/logo.png" alt="Logo" width={200} height={200} />
+```
+
+### 2. Code Splitting
+By default, Next.js splits your code into smaller chunks so users only download what they need.
+
+### 3. Caching and CDNs
+Leverage browser caching and deploy your app to a CDN for global performance.
+
+### 4. Avoid Unnecessary SSR
+Use Static Generation (SSG) wherever possible—SSR should be reserved for pages that truly need it.
+
+## Recommendations
+-Monitor performance with Lighthouse or Web Vitals.\
+-Use Incremental Static Regeneration (ISR) for content that changes often.\
+-Consider Edge Functions (Vercel, Cloudflare Workers) for ultra-low latency.
+
+## Conclusions
+
+Optimizing your Next.js app ensures it’s fast, scalable, and SEO-friendly. Start with image optimization and caching, and layer in SSR or ISR only when necessary.

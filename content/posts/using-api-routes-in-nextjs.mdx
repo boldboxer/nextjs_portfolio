@@ -1,0 +1,44 @@
+---
+title: Using API Routes in Next.js for Backend Logic
+summary: API routes let you build a backend inside your Next.js project. Learn how they work and why they’re useful for small to medium applications.
+image: /images/posts/usingapiroutes.jpg
+author: 'dev Nyamunga'
+publishedAt: '2024-12-18'
+---
+
+Next.js isn’t just for building frontend applications. With API routes, you can create serverless backend logic directly within your app—no need for a separate server.
+
+## What Are API Routes?
+
+API routes live under the `/pages/api` directory. Each file maps to an API endpoint. For example:
+
+```tsx
+// pages/api/hello.ts
+import { NextApiRequest, NextApiResponse } from 'next';
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
+  res.status(200).json({ message: 'Hello from Next.js API!' });
+}
+```
+
+Visiting `/api/hello` in the browser or calling it with fetch`("/api/hello")` will return JSON.
+
+## Why Use API Routes?
+
+-**Simplicity**: Everything lives inside your Next.js app—frontend and backend together.
+-**Serverless Ready**: When deployed (e.g., on Vercel), API routes scale automatically.\
+-**Great for Prototypes and Small Projects**: Perfect for apps that don’t need a full backend.
+
+## Limitations and Alternatives
+
+While API routes are powerful, they are not a replacement for a full backend when dealing with:
+
+-Heavy workloads (long-running jobs, queues).\
+-Complex APIs with many endpoints.\
+-Databases at scale, where frameworks like NestJS or Express may be more suitable.
+
+***In those cases, API routes can serve as a bridge or complement rather than a complete solution.***
+
+## Conlclusion
+
+API routes in Next.js let you move faster by bundling backend logic into your frontend app. For small to medium applications, this can be a huge productivity boost. For larger systems, consider combining API routes with a more robust backend service.

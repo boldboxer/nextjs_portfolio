@@ -1,0 +1,33 @@
+---
+title: "Hosting Next.js Applications on AWS (EC2, S3, CloudFront)"
+summary: AWS offers robust infrastructure for hosting Next.js apps. Learn how to set up hosting with EC2, S3, and CloudFront.
+image: /images/posts/hosting.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-07-09'
+---
+
+While Vercel is the easiest choice, some projects require AWS for flexibility, compliance, or existing infrastructure. AWS gives you full control but requires more setup.
+
+## Common Architecture
+
+1. **EC2** → Runs your Next.js server for SSR.
+2. **S3** → Stores static assets like images or pre-built pages.
+3. **CloudFront** → Serves your app globally via CDN.
+
+## Pros and Cons
+
+| Factor               | AWS                     | Vercel              |
+| -------------------- | ----------------------- | ------------------- |
+| Setup Effort         | Medium–High             | Very Low            |
+| Flexibility          | Very High               | Medium              |
+| Cost (small apps)    | Higher                  | Lower               |
+| Scaling              | Manual or autoscaling   | Automatic           |
+
+## Recommendations
+
+- Use AWS if your app requires **tight integration with other AWS services** (RDS, Lambda, etc.).
+- Stick with Vercel for **smaller projects or fast deployments**.
+
+## Conclusion
+
+AWS hosting for Next.js offers maximum control and scalability but comes with more management overhead. It’s ideal for enterprise projects but may be overkill for small apps.
