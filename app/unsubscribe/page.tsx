@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { unsubscribe } from '@/lib/actions'
 
+// 🚀 Prevents Next.js from trying to statically generate this page
+export const dynamic = 'force-dynamic'
+
 export default function UnsubscribePage() {
   const searchParams = useSearchParams()
   const email = searchParams.get('email')
