@@ -26,7 +26,7 @@ const WelcomeEmail: React.FC<Readonly<WelcomeEmailProps>> = ({ name, email }) =>
         </p>
 
         <a
-            href="https://your-portfolio-link.com"
+            href="https://devnyamunga.qualifixdevs.online"
             style={{
                 display: 'inline-block',
                 marginTop: '30px',

@@ -37,7 +37,7 @@ export async function sendEmail(data: ContactFormInputs) {
     const { data: confirmData, error: confirmError } = await resend.emails.send({
       from: 'Dev Nyamunga <dev.nyamunga@qualifixdevs.online>',
       to: email,
-      subject: `✅ We received your message, ${name}!`,
+      subject: `📩 We received your message, ${name}!`,
       react: ContactConfirmationEmail({ name }),
     })
 
