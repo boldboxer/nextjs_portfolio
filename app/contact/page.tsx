@@ -1,6 +1,10 @@
 import ContactForm from '@/components/contact-form'
 import { Suspense } from 'react'
 
+// ✅ Force runtime rendering to avoid build-time errors
+export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
+
 export default function Contact() {
   return (
     <section className='pb-24 pt-40'>

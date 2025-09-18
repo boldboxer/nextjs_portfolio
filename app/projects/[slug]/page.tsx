@@ -9,7 +9,8 @@ import { notFound } from 'next/navigation'
 import { Suspense } from 'react'
 
 // ✅ Ensure static generation, no runtime fallback
-export const dynamic = 'error'
+export const dynamicParams =  false
+export const dynamic = 'force-static'
 
 export async function generateStaticParams() {
   const projects = await getProjects()

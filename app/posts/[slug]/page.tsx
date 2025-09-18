@@ -12,6 +12,8 @@ import { Suspense } from 'react'
 
 // ✅ Only allow static params (Next.js won’t try dynamic fallback)
 export const dynamicParams = false
+export const dynamic = 'force-static'
+
 
 export async function generateStaticParams() {
   const posts = await getPosts()

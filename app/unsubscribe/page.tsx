@@ -7,6 +7,7 @@ import { unsubscribe } from '@/lib/actions'
 
 // Prevent Next.js from prerendering this page
 export const dynamic = 'force-dynamic'
+export const fetchCache = 'force-no-store'
 
 function UnsubscribeContent() {
   const searchParams = useSearchParams()

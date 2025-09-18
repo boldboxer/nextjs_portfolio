@@ -3,7 +3,7 @@ import PostsWithSearch from '@/components/posts-with-search'
 import { Suspense } from 'react'
 
 // ✅ Force static generation
-export const dynamic = 'error'
+export const dynamic = 'force-static'
 
 export default async function PostsPage() {
   const posts = await getPosts()

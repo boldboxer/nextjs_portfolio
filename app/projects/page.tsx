@@ -3,7 +3,7 @@ import { getProjects } from '@/lib/projects'
 import { Suspense } from 'react'
 
 // ✅ Force static generation
-export const dynamic = 'error'
+export const dynamic = 'force-static'
 
 export default async function ProjectsPage() {
   const projects = await getProjects()

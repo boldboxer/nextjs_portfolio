@@ -2,7 +2,7 @@ import Intro from "@/components/intro"
 import NewsletterForm from "@/components/news-letter-form"
 import RecentPosts from "@/components/recent-posts"
 import RecentProjects from "@/components/recentprojects"
-
+import { Suspense } from "react"
 
 export default function Home() {
   return (
@@ -12,7 +12,10 @@ export default function Home() {
 
         <RecentPosts />
         <RecentProjects />
-        <NewsletterForm />
+
+        <Suspense fallback={<p className="text-center mt-10">Loading newsletter form...</p>}>
+          <NewsletterForm />
+        </Suspense>
       </div>
     </section>
   )
