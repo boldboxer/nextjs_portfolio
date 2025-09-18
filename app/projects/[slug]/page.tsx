@@ -6,16 +6,18 @@ import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { getProjectBySlug, getProjects } from '@/lib/projects'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
+
+// ✅ Ensure static generation, no runtime fallback
+export const dynamic = 'error'
 
 export async function generateStaticParams() {
   const projects = await getProjects()
-  const slugs = projects.map(project => ({ slug: project.slug }))
-
-  return slugs
+  return projects.map(project => ({ slug: project.slug }))
 }
 
 export default async function Project({
-  params
+  params,
 }: {
   params: { slug: string }
 }) {
@@ -30,36 +32,38 @@ export default async function Project({
   const { title, image, author, publishedAt } = metadata
 
   return (
-    <section className='pb-24 pt-32'>
-      <div className='container max-w-3xl'>
+    <section className="pb-24 pt-32">
+      <div className="container max-w-3xl">
         <Link
-          href='/projects'
-          className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
+          href="/projects"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
         >
-          <ArrowLeftIcon className='h-5 w-5' />
+          <ArrowLeftIcon className="h-5 w-5" />
           <span>Back to projects</span>
         </Link>
 
         {image && (
-          <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
+          <div className="relative mb-6 h-96 w-full overflow-hidden rounded-lg">
             <Image
               src={image}
               alt={title || ''}
-              className='object-cover'
+              className="object-cover"
               fill
             />
           </div>
         )}
 
         <header>
-          <h1 className='title'>{title}</h1>
-          <p className='mt-3 text-xs text-muted-foreground'>
+          <h1 className="title">{title}</h1>
+          <p className="mt-3 text-xs text-muted-foreground">
             {author} / {formatDate(publishedAt ?? '')}
           </p>
         </header>
 
-        <main className='prose mt-16 dark:prose-invert'>
-          <MDXContent source={content} />
+        <main className="prose mt-16 dark:prose-invert">
+          <Suspense fallback={<p>Loading content...</p>}>
+            <MDXContent source={content} />
+          </Suspense>
         </main>
       </div>
     </section>

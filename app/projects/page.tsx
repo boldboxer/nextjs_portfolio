@@ -1,5 +1,9 @@
 import Projects from '@/components/projects'
 import { getProjects } from '@/lib/projects'
+import { Suspense } from 'react'
+
+// ✅ Force static generation
+export const dynamic = 'error'
 
 export default async function ProjectsPage() {
   const projects = await getProjects()
@@ -9,7 +13,9 @@ export default async function ProjectsPage() {
       <div className='container max-w-3xl'>
         <h1 className='title mb-12'>Projects</h1>
 
-        <Projects projects={projects} />
+        <Suspense fallback={<p className="text-center mt-20">Loading Projects...</p>}>
+          <Projects projects={projects} />
+        </Suspense>
       </div>
     </section>
   )

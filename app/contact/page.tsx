@@ -1,4 +1,5 @@
 import ContactForm from '@/components/contact-form'
+import { Suspense } from 'react'
 
 export default function Contact() {
   return (
@@ -6,7 +7,10 @@ export default function Contact() {
       <div className='container max-w-3xl'>
         <h2 className='title'>Let&apos;s talk about your project</h2>
 
-        <ContactForm />
+        {/* ✅ Suspense wrapper added */}
+        <Suspense fallback={<p className="mt-10 text-center">Loading form...</p>}>
+          <ContactForm />
+        </Suspense>
       </div>
     </section>
   )

@@ -6,8 +6,12 @@ import MDXContent from '@/components/mdx-content'
 import { getPosts, getPostBySlug } from '@/lib/posts'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react'
 // import NewsletterForm from '@/components/newsletter-form'
-import React from 'react'
+// import React from 'react'
+
+// ✅ Only allow static params (Next.js won’t try dynamic fallback)
+export const dynamicParams = false
 
 export async function generateStaticParams() {
   const posts = await getPosts()
@@ -56,8 +60,10 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </p>
         </header>
 
-        <main className='prose mt-16 dark:prose-invert'>
-          <MDXContent source={content} />
+        <main className="prose mt-16 dark:prose-invert">
+          <Suspense fallback={<p>Loading content...</p>}>
+            <MDXContent source={content} />
+          </Suspense>
         </main>
 
         {/* <footer className='mt-16'>
