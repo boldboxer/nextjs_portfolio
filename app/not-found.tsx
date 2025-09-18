@@ -1,8 +1,7 @@
 import Link from "next/link"
 import { ArrowLeftIcon } from "@radix-ui/react-icons"
-import { Suspense } from "react"
 
-function NotFoundContent() {
+export default function NotFound() {
   return (
     <section className="pb-24 pt-40">
       <div className="min-h-full px-4 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
@@ -34,13 +33,5 @@ function NotFoundContent() {
         </div>
       </div>
     </section>
-  )
-}
-
-export default function NotFound() {
-  return (
-    <Suspense fallback={<p className="text-center mt-20">Loading...</p>}>
-      <NotFoundContent />
-    </Suspense>
   )
 }
