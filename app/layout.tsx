@@ -39,7 +39,7 @@ export default function RootLayout({
             _paq.push(['trackPageView']);
             _paq.push(['enableLinkTracking']);
             (function() {
-              var u="//your-server-ip:8080/"; // replace with your server/domain
+              var u="//matomo.qualifixdevs.online/"; // replace with your server/domain
               _paq.push(['setTrackerUrl', u+'matomo.php']);
               _paq.push(['setSiteId', '1']);
               var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
