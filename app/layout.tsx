@@ -32,7 +32,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        {/* ✅ Matomo Analytics */}
+        {/* ✅ Matomo Analytics Check if works*/}
         <Script id="matomo-analytics" strategy="afterInteractive">
           {`
             var _paq = window._paq = window._paq || [];
