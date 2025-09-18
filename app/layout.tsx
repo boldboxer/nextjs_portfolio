@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
 import Script from "next/script"; // ✅ use Next.js Script
-import MatomoTracker from "@/components/matomo-tracker";
+// import MatomoTracker from "@/components/matomo-tracker";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -67,7 +67,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main className="grow">
-            <MatomoTracker /> {/* ✅ Tracks SPA route changes */}
+            {/* <MatomoTracker /> ✅ Tracks SPA route changes */}
             {children}
           </main>
           <Footer />
