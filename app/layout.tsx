@@ -4,7 +4,7 @@ import Providers from "@/components/providers";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
-import Script from "next/script"; // ✅ use Next.js Script
+// import Script from "next/script"; // ✅ use Next.js Script
 // import MatomoTracker from "@/components/matomo-tracker";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
