@@ -1,0 +1,151 @@
+---
+title: "Integrating Google Analytics 4 (GA4) and Google Tag Manager (GTM) in Next.js"
+summary: Learn how to set up GA4 and GTM in your Next.js app with a custom pageview trigger that tracks client-side navigation.
+image: /images/posts/nextjs-ga4-gtm.jpg
+author: 'dev Nyamunga'
+publishedAt: '2025-09-21'
+---
+
+Google Analytics 4 (GA4) is a powerful analytics platform, but integrating it into a modern **Next.js App Router** project requires more than just copy-pasting the snippet. In this guide, we’ll set up GA4 with **Google Tag Manager (GTM)**, track SPA page views, and keep things secure using environment variables.
+
+---
+
+## Why Use GTM with GA4?
+
+- **Centralized tracking**: Manage GA4 events, marketing tags, and pixels from one dashboard.  
+- **Flexibility**: Push custom events from your app (`sign_up`, `contact_submit`, etc.) without hard-coding them into GA4.  
+- **Future-proof**: You can add or modify tags without redeploying your Next.js app.  
+
+---
+
+## Step 1: Securely Store Your GTM ID
+
+Instead of hard-coding the GTM container ID (`GTM-XXXXXXX`), store it in your environment file:
+
+```env
+# .env.local
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+```
+
+This ensures sensitive identifiers don’t end up in version control.
+
+## Step 2: Add GTM to Your Next.js Root Layout
+We’ll inject the GTM script and noscript fallback into app/layout.tsx:
+
+```jsx live
+import Script from "next/script";
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
+```
+
+Gtag
+```
+  return (
+    <html lang="en">
+      <head> {gtmId && (<Script id="gtm-script" strategy="afterInteractive" dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];
+                  w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+                  var f=d.getElementsByTagName(s)[0],
+                      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+                  j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                  f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${gtmId}');
+              `,}}/>)}
+      </head>
+```
+
+### No script fallback
+```
+      <body>
+        {gtmId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            ></iframe>
+          </noscript>
+        )}
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+## Step 3: Track SPA Pageviews
+
+Next.js App Router uses client-side navigation, so GA4 doesn’t automatically detect route changes. We’ll create a GtmPageView component to push events on every navigation:
+
+```tsx
+// components/GtmPageView.tsx
+"use client";
+
+import { usePathname } from "next/navigation";
+import { useEffect } from "react";
+
+export default function GtmPageView() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "pageview",
+        page: pathname,
+      });
+    }
+  }, [pathname]);
+
+  return null;
+}
+```
+
+And include it in your layout:
+
+```
+import { Suspense } from "react";
+import GtmPageView from "@/components/GtmPageView";
+<Suspense fallback={null}>
+  <GtmPageView />
+</Suspense> 
+```
+## Step 4: Configure GTM to Send Pageviews to GA4
+Inside <a href="https://tagmanager.google.com/" target="_blank" rel="noopener noreferrer">Google Tag Manager:</a>
+1. Create a Data Layer Variable
+    - Type: Data Layer Variable
+    - Name: DLV - page
+    - Data Layer Variable Name: page
+
+2. Create a Trigger
+    - Type: Custom Event
+    - Event Name: pageview
+    - Save as: CE - pageview
+
+3. Create a GA4 Event Tag
+    - Tag type: Google Analytics: GA4 Event
+    - Configuration Tag: your GA4 Config (with Measurement ID G-XXX)
+    - Event Name: page_view
+    - Parameters:
+        - page_location → `{{DLV - page}}`
+    - Trigger: CE - pageview
+
+4. Publish & Test
+    - Use GTM’s Preview mode to confirm GA4 - Pageview fires.
+    - Check GA4 Realtime → Events → you should see page_view events.
+
+## Security Tip
+
+Always load the GTM container ID from an environment variable (NEXT_PUBLIC_GTM_ID). 
+This avoids leaking IDs in source control and makes it easier to configure different containers for dev, staging, and production environments.
+
+## Conclusion
+
+With this setup:
+    - GA4 is initialized via GTM.
+    - Every client-side navigation in Next.js pushes a pageview event.
+    - GTM listens for pageview and sends a proper page_view event to GA4 with the current route.
+
+This approach keeps your analytics flexible, secure, and aligned with Next.js App Router best practices.

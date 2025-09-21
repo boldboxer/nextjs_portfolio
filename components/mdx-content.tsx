@@ -10,6 +10,15 @@ function Code({ children, ...props }: any) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
 }
 
+function Table(props: any) {
+  return (
+    <div className="overflow-x-auto max-h-[60vh] md:max-h-[50vh] md:overflow-y-auto">
+      <table className="w-full border-collapse text-sm" {...props} />
+    </div>
+  )
+}
+
+
 // 🔗 Custom link renderer (all links open in new tab)
 function CustomLink(props: any) {
   return (
@@ -28,6 +37,7 @@ const components = {
   code: Code,
   Counter,
   a: CustomLink, // 👈 override all <a> tags
+  table: Table,
 }
 
 export default function MDXContent(
