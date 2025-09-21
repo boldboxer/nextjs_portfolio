@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import Script from "next/script"; // ✅ use Next.js Script
 // import MatomoTracker from "@/components/matomo-tracker";
 import "./globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* ✅ Google Tag Manager */}
-        <Script id="gtm" strategy="afterInteractive">
+        {/* <Script id="gtm" strategy="afterInteractive">
           {`
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,10 +31,11 @@ export default function RootLayout({
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-M7M97VT9');
           `}
-        </Script>
+        </Script> */}
+        
 
         {/* ✅ Matomo Analytics Check if works*/}
-        <Script id="matomo-analytics" strategy="afterInteractive">
+        {/* <Script id="matomo-analytics" strategy="afterInteractive">
           {`
             var _paq = window._paq = window._paq || [];
             _paq.push(['trackPageView']);
@@ -46,7 +48,7 @@ export default function RootLayout({
               g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
             })();
           `}
-        </Script>
+        </Script> */}
       </head>
       <body
         className={cn(
@@ -69,6 +71,7 @@ export default function RootLayout({
           <main className="grow">
             {/* <MatomoTracker /> ✅ Tracks SPA route changes */}
             {children}
+            <GoogleAnalytics gaId="G-K5CE6849GH" />
           </main>
           <Footer />
         </Providers>
