@@ -4,7 +4,7 @@ import Providers from "@/components/providers";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { cn } from "@/lib/utils";
-// import Script from "next/script"; // ✅ use Next.js Script
+import Script from "next/script"; // ✅ use Next.js Script
 // import MatomoTracker from "@/components/matomo-tracker";
 import "./globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
@@ -32,7 +32,20 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-M7M97VT9');
           `}
         </Script> */}
-        
+
+        {/* Google tag (gtag.js) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-K5CE6849GH"
+          strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-K5CE6849GH');
+          `}
+        </Script>
+
 
         {/* ✅ Matomo Analytics Check if works*/}
         {/* <Script id="matomo-analytics" strategy="afterInteractive">
