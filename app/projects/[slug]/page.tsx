@@ -34,7 +34,7 @@ export default async function Project({
 
   return (
     <section className="pb-24 pt-32">
-      <div className="container max-w-3xl">
+      <div className="container max-w-4xl">
         <Link
           href="/projects"
           className="mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground"

@@ -14,6 +14,78 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Nyamunga Portfolio",
   description: "dev Nyamunga's portfolio",
+  icons: {
+    icon: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "196x196",
+        url: "/no-bg/favicon-196x196.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "96x96",
+        url: "/no-bg/favicon-96x96.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/no-bg/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        url: "/no-bg/favicon-16x16.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "128x128",
+        url: "/no-bg/favicon-128.png",
+      },
+    ],
+    apple: [
+      {
+        sizes: "57x57",
+        url: "/no-bg/apple-touch-icon-57x57.png",
+      },
+      {
+        sizes: "114x114",
+        url: "/no-bg/apple-touch-icon-114x114.png",
+      },
+      {
+        sizes: "72x72",
+        url: "/no-bg/apple-touch-icon-72x72.png",
+      },
+      {
+        sizes: "144x144",
+        url: "/no-bg/apple-touch-icon-144x144.png",
+      },
+      {
+        sizes: "60x60",
+        url: "/no-bg/apple-touch-icon-60x60.png",
+      },
+      {
+        sizes: "120x120",
+        url: "/no-bg/apple-touch-icon-120x120.png",
+      },
+      {
+        sizes: "76x76",
+        url: "/no-bg/apple-touch-icon-76x76.png",
+      },
+      {
+        sizes: "152x152",
+        url: "/no-bg/apple-touch-icon-152x152.png",
+      },
+    ],
+  },
+  other: {
+    name: "msapplication-TileColor",
+    content: "#FFFFFF",
+  },
 };
 
 export default function RootLayout({
@@ -22,19 +94,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Google tag (gtag.js) */}
-        {/* <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-K5CE6849GH"
-          strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-K5CE6849GH');
-          `}
-        </Script> */}
-
         {/* ✅ Google Tag Manager (GTM) */}
         <Script id="gtm-script" strategy="afterInteractive">
           {`
@@ -45,8 +104,6 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-M7M97VT9');
           `}
         </Script>
-
-
         {/* ✅ Matomo Analytics Check if works*/}
         {/* <Script id="matomo-analytics" strategy="afterInteractive">
           {`
