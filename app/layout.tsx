@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import Script from "next/script"; // ✅ use Next.js Script
 // import MatomoTracker from "@/components/matomo-tracker";
 import "./globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import GtmPageView from "@/components/gtm-page-view.tsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,19 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* ✅ Google Tag Manager */}
-        {/* <Script id="gtm" strategy="afterInteractive">
-          {`
-            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-M7M97VT9');
-          `}
-        </Script> */}
-
         {/* Google tag (gtag.js) */}
-        <Script
+        {/* <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-K5CE6849GH"
           strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -44,7 +33,7 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-K5CE6849GH');
           `}
-        </Script>
+        </Script> */}
 
         {/* ✅ Google Tag Manager (GTM) */}
         <Script id="gtm-script" strategy="afterInteractive">
@@ -80,7 +69,7 @@ export default function RootLayout({
           inter.className
         )}
       >
-        {/* Google Tag Manager - NoScript */}
+        {/* Google Tag Manager - NoScript fallback */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-M7M97VT9"
@@ -94,8 +83,8 @@ export default function RootLayout({
           <Header />
           <main className="grow">
             {/* <MatomoTracker /> ✅ Tracks SPA route changes */}
+            <GtmPageView />
             {children}
-            <GoogleAnalytics gaId="G-K5CE6849GH" />
           </main>
           <Footer />
         </Providers>
